@@ -43,6 +43,8 @@ public class LearnFFmpeg {
                 stream.width,
                 stream.height
         );
+
+        videoEncoding();
     }
 
     // 视频编码
@@ -52,25 +54,28 @@ public class LearnFFmpeg {
 
         FFmpegBuilder builder = new FFmpegBuilder()
 
-                .setInput("input.mp4")     // Filename, or a FFmpegProbeResult
+                .setInput(PREFIX + "input.mp4")     // Filename, or a FFmpegProbeResult
                 .overrideOutputFiles(true) // Override the output if it exists
 
-                .addOutput("output.mp4")   // Filename for the destination
-                .setFormat("mp4")        // Format is inferred from filename, or can be set
-                .setTargetSize(250_000)  // Aim for a 250KB file
+                .addOutput("test_m3u8hls.m3u8")   // Filename for the destination
+                .setFormat("hls")        // Format is inferred from filename, or can be set
+//                .setTargetSize(250_000)  // Aim for a 250KB file
 
                 .disableSubtitle()       // No subtiles
 
                 .setAudioChannels(1)         // Mono audio
                 .setAudioCodec("aac")        // using the aac codec
-                .setAudioSampleRate(48_000)  // at 48KHz
-                .setAudioBitRate(32768)      // at 32 kbit/s
+//                .setAudioSampleRate(48_000)  // at 48KHz
+//                .setAudioBitRate(32768)      // at 32 kbit/s
 
                 .setVideoCodec("libx264")     // Video using x264
                 .setVideoFrameRate(24, 1)     // at 24 frames per second
-                .setVideoResolution(640, 480) // at 640x480 resolution
+//                .setVideoResolution(640, 480) // at 640x480 resolution
 
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL) // Allow FFmpeg to use experimental specs
+
+                // 设置hls相关的参数
+//                .addExtraArgs(" -hls_time 5 ", " -hls_list_size 0 ")
                 .done();
 
         FFmpegExecutor executor = new FFmpegExecutor(ffmpeg, ffprobe);
@@ -79,7 +84,7 @@ public class LearnFFmpeg {
         executor.createJob(builder).run();
 
         // Or run a two-pass encode (which is better quality at the cost of being slower)
-        executor.createTwoPassJob(builder).run();
+//        executor.createTwoPassJob(builder).run();
     }
 
     public static void encodeWithListener() throws IOException {
