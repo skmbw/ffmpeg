@@ -49,8 +49,8 @@ public class LearnFFmpeg {
 
     // 视频编码
     public static void videoEncoding() throws IOException {
-        FFmpeg ffmpeg = new FFmpeg(PREFIX + "ffmpeg.exe");
-        FFprobe ffprobe = new FFprobe(PREFIX + "ffprobe.exe");
+        FFmpeg ffmpeg = new FFmpeg(PREFIX + "ffmpeg");
+        FFprobe ffprobe = new FFprobe(PREFIX + "ffprobe");
 
         FFmpegBuilder builder = new FFmpegBuilder()
 
