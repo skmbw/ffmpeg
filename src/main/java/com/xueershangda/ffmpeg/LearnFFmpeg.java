@@ -65,8 +65,8 @@ public class LearnFFmpeg {
 
                 .setAudioChannels(1)         // Mono audio
                 .setAudioCodec("aac")        // using the aac codec
-//                .setAudioSampleRate(48_000)  // at 48KHz
-//                .setAudioBitRate(32768)      // at 32 kbit/s
+                .setAudioSampleRate(48_000)  // at 48KHz
+                .setAudioBitRate(32768)      // at 32 kbit/s
 
                 .setVideoCodec("libx264")     // Video using x264
                 .setVideoFrameRate(24, 1)     // at 24 frames per second
@@ -75,7 +75,8 @@ public class LearnFFmpeg {
                 .setStrict(FFmpegBuilder.Strict.EXPERIMENTAL) // Allow FFmpeg to use experimental specs
 
                 // 设置hls相关的参数
-//                .addExtraArgs(" -hls_time 5 ", " -hls_list_size 0 ")
+                // 参数key和参数值要分开，否则会全部作为一个参数key，导致 Unrecognized option 'hls_time 5'，就是不认识这个参数
+                .addExtraArgs("-hls_time", "5", "-hls_list_size", "0")
                 .done();
 
         FFmpegExecutor executor = new FFmpegExecutor(ffmpeg, ffprobe);
