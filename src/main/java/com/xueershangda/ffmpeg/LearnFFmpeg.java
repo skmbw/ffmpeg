@@ -53,7 +53,7 @@ public class LearnFFmpeg {
         FFprobe ffprobe = new FFprobe(PREFIX + "ffprobe");
 
         FFmpegBuilder builder = new FFmpegBuilder()
-
+                .setVerbosity(FFmpegBuilder.Verbosity.INFO) // 日志级别
                 .setInput(PREFIX + "input.mp4")     // Filename, or a FFmpegProbeResult
                 .overrideOutputFiles(true) // Override the output if it exists
 
