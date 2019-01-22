@@ -12,5 +12,6 @@ public class TestFileSeperator {
         // 因为是包含起始字符，不包含最后的字符，所以会包含斜杠\
         System.out.println(path.substring(path.lastIndexOf(File.separator)));
         System.out.println(path.substring(path.lastIndexOf(File.separator) + 1));
+        System.out.println(path.substring(path.lastIndexOf(File.separator) + 1, path.lastIndexOf(".")));
     }
 }
