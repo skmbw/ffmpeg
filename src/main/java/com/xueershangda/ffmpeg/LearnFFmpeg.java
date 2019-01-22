@@ -54,10 +54,11 @@ public class LearnFFmpeg {
 
         FFmpegBuilder builder = new FFmpegBuilder()
                 .setVerbosity(FFmpegBuilder.Verbosity.INFO) // 日志级别
+                // 输入文件也要指定路径，否在在当前项目路径下找，找不到会报错
                 .setInput(PREFIX + "input.mp4")     // Filename, or a FFmpegProbeResult
                 .overrideOutputFiles(true) // Override the output if it exists
-
-                .addOutput("test_m3u8hls.m3u8")   // Filename for the destination
+                // 生成的输出文件，可以指定路径，否则在当前项目路径
+                .addOutput(PREFIX + "test_m3u8hls.m3u8")   // Filename for the destination
                 .setFormat("hls")        // Format is inferred from filename, or can be set
 //                .setTargetSize(250_000)  // Aim for a 250KB file
 
